@@ -16,6 +16,7 @@ class WelcomeScreen extends StatefulWidget {
 class _WelcomeScreenState extends State<WelcomeScreen> with SingleTickerProviderStateMixin {
   late AnimationController controller ;
   late Animation animation;
+  late Animation colorAnimation;
   @override
   void initState() {
     super.initState();
@@ -24,10 +25,12 @@ class _WelcomeScreenState extends State<WelcomeScreen> with SingleTickerProvider
       vsync:this,
       upperBound: 1,
     );
+    colorAnimation = ColorTween(begin: Colors.black,end: Colors.teal).animate(controller);
     animation = CurvedAnimation(parent: controller, curve: Curves.decelerate);
     controller.forward();
     controller.addStatusListener((status){
       print(status);
+
     });
     controller.addListener((){
       setState(() {
@@ -37,13 +40,19 @@ class _WelcomeScreenState extends State<WelcomeScreen> with SingleTickerProvider
     
   }
 
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: colorAnimation.value,
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 24.0),
+        padding: EdgeInsets.symmetric(horizontal: 14.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -53,14 +62,14 @@ class _WelcomeScreenState extends State<WelcomeScreen> with SingleTickerProvider
                 Hero(
                   tag: 'logo',
                   child: Container(
-                    height: animation.value*70,
+                    height: animation.value*80,
                     child: Image.asset('images/logo.png'),
                   ),
                 ),
-                Text(
+                const Text(
                   'GIGA CHAT',
                   style:TextStyle(
-                    fontSize: animation.value * 45 ,
+                    fontSize:  45 ,
                     fontWeight: FontWeight.w900,
                     color: Colors.white,
                   ),
