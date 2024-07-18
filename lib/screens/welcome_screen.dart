@@ -25,7 +25,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> with SingleTickerProvider
       vsync:this,
       upperBound: 1,
     );
-    colorAnimation = ColorTween(begin: Colors.black,end: Colors.teal).animate(controller);
+    colorAnimation = ColorTween(begin: Colors.blueGrey,end: Colors.black).animate(controller);
     animation = CurvedAnimation(parent: controller, curve: Curves.decelerate);
     controller.forward();
     controller.addStatusListener((status){
