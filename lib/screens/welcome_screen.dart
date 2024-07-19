@@ -1,4 +1,5 @@
 
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:chat_application/screens/login_screen.dart';
 import 'package:chat_application/screens/registration_screen.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +38,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> with SingleTickerProvider
       });
       print(animation.value);
     });
-    
+
   }
 
   @override
@@ -66,13 +67,15 @@ class _WelcomeScreenState extends State<WelcomeScreen> with SingleTickerProvider
                     child: Image.asset('images/logo.png'),
                   ),
                 ),
-                const Text(
-                  'GIGA CHAT',
-                  style:TextStyle(
+                TypewriterAnimatedTextKit(
+                  text: ['Giga Chat' , 'Giga Chad'],
+                  textStyle:const TextStyle(
+                    decorationColor: Colors.red,
                     fontSize:  45 ,
                     fontWeight: FontWeight.w900,
                     color: Colors.white,
                   ),
+                  speed: Duration(milliseconds: 200),
                 ),
               ],
             ),
