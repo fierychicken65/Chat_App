@@ -11,6 +11,8 @@ class RegistrationScreen extends StatefulWidget {
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
+  late String email;
+  late String password;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,8 +35,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             ),
             TextField(
               onChanged: (value) {
-                //Do something with the user input.
+                email = value;
+
               },
+              textAlign: TextAlign.center,
+              keyboardType: TextInputType.emailAddress,
               decoration:const InputDecoration(
                 hintText: 'Enter your email',
                 contentPadding:
@@ -57,8 +62,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             ),
             TextField(
               onChanged: (value) {
-                //Do something with the user input.
+                password = value;
               },
+              obscureText: true,
+              textAlign: TextAlign.center,
               decoration:const InputDecoration(
                 hintText: 'Enter your password',
                 contentPadding:
@@ -89,7 +96,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   elevation: 5.0,
                   child: MaterialButton(
                     onPressed: () {
-                      //Implement registration functionality.
+                      print(email);
+                      print(password);
+
                     },
                     minWidth: 200.0,
                     height: 42.0,
