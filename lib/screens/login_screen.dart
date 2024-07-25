@@ -42,6 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 onChanged: (value) {
                   email = value;
                 },
+                textAlign: TextAlign.center,
                 decoration:const InputDecoration(
                   hintText: 'Enter your email',
                   contentPadding:
@@ -65,9 +66,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 8.0,
               ),
               TextField(
+                obscureText: true,
                 onChanged: (value) {
                   password = value;
                 },
+                textAlign: TextAlign.center,
                 decoration:const InputDecoration(
                   hintText: 'Enter your password.',
                   contentPadding:
@@ -90,36 +93,38 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(
                 height: 24.0,
               ),
-              Hero(
-                tag:'login',
-                child: Padding(
-                  padding: EdgeInsets.symmetric(vertical: 16.0),
-                  child: Material(
-                    color: Colors.lightBlueAccent,
-                    borderRadius: BorderRadius.all(Radius.circular(30.0)),
-                    elevation: 5.0,
-                    child: MaterialButton(
-                      onPressed: () async {
-                        setState(() {
-                          showSpinner = true;
-                        });
-
-                        try{
-                          final user = await _auth.signInWithEmailAndPassword(email: email, password: password);
-                          Navigator.pushNamed(context, ChatScreen.id);
+              Flexible(
+                child: Hero(
+                  tag:'login',
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(vertical: 16.0),
+                    child: Material(
+                      color: Colors.lightBlueAccent,
+                      borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                      elevation: 5.0,
+                      child: MaterialButton(
+                        onPressed: () async {
                           setState(() {
-                            showSpinner = false;
+                            showSpinner = true;
                           });
-                        }catch(e){
-                          print(e);
-                        }
-
-
-                      },
-                      minWidth: 200.0,
-                      height: 42.0,
-                      child: Text(
-                        'Log In',
+                
+                          try{
+                            final user = await _auth.signInWithEmailAndPassword(email: email, password: password);
+                            Navigator.pushNamed(context, ChatScreen.id);
+                            setState(() {
+                              showSpinner = false;
+                            });
+                          }catch(e){
+                            print(e);
+                          }
+                
+                
+                        },
+                        minWidth: 200.0,
+                        height: 42.0,
+                        child: Text(
+                          'Log In',
+                        ),
                       ),
                     ),
                   ),
